@@ -1,0 +1,18 @@
+GerbangDepan -6.893072 107.610445
+Borromeus -6.893796 107.613041
+McDDago -6.885277 107.613710
+BNITamanSari -6.893899 107.608445
+TubagusIsmail -6.883470 107.614548
+GoldenMonkey -6.887432 107.613593
+Plesiran -6.896888 107.609664
+KebonBibit -6.894943 107.608852
+*
+GerbangDepan Borromeus BNITamanSari KebonBibit X
+Borromeus GerbangDepan GoldenMonkey X
+McDDago BNITamanSari TubagusIsmail GoldenMonkey X
+BNITamanSari GerbangDepan McDDago GoldenMonkey KebonBibit X
+TubagusIsmail McDDago X
+GoldenMonkey McDDago Borromeus BNITamanSari X
+Plesiran KebonBibit X
+KebonBibit GerbangDepan BNITamanSari Plesiran X
+*

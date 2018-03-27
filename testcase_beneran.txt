@@ -1,18 +1,17 @@
-GerbangDepan 769 1159
-Borromeus 689 1448
-McDDago 1634 1522
-BNITamanSari 677 937
-TubagusIsmail 1835 1615
-GoldenMonkey 1395 1508
-Plesiran 345 1073
-KebonBibit 561 983
+GerbangDepan 769 1159 
+Borromeus 689 1448 
+McDDago 1634 1522 
+BNITamanSari 677 937 
+TubagusIsmail 1835 1615 
+GoldenMonkey 1395 1508 
+Plesiran 345 1073 
+KebonBibit 561 983 
 *
-GerbangDepan Borromeus 300 BNITamanSari 250 KebonBibit 350 X
-Borromeus GerbangDepan 300 GoldenMonkey 700 X
-McDDago BNITamanSari 1400 TubagusIsmail 230 GoldenMonkey 240 X
-BNITamanSari GerbangDepan 250 McDDago 1400 GoldenMonkey 1300 KebonBibit 130 X
-TubagusIsmail McDDago 230 X
-GoldenMonkey Borromeus 700 McDDago 240 BNITamanSari 1300 X
-Plesiran KebonBibit 240 X
-KebonBibit GerbangDepan 350 BNITamanSari 250 Plesiran 240 X
-*
+GerbangDepan Borromeus 300 BNITamanSari 250 KebonBibit 350
+Borromeus GerbangDepan 300 GoldenMonkey 700
+McDDago BNITamanSari 1400 TubagusIsmail 230 GoldenMonkey 240
+BNITamanSari GerbangDepan 250 McDDago 1400 GoldenMonkey 1300 KebonBibit 130
+TubagusIsmail McDDago 230
+GoldenMonkey Borromeus 700 McDDago 240 BNITamanSari 1300
+Plesiran KebonBibit 240
+KebonBibit GerbangDepan 350 BNITamanSari 250 Plesiran 240

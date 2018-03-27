@@ -61,6 +61,7 @@ class ListOfNode:
     def getSize(self):
         return len(self.list)
 
+
 def main():
     # membaca file eksternal
     nodelist = ListOfNode()
@@ -75,6 +76,12 @@ def main():
     # nodelist.getElmt(5).printInfo()
     # nodelist.getElmt(6).printInfo()
     # nodelist.getElmt(7).printInfo()
+
+    start = input('Masukkan tempat awal: ')
+    finish = input('Masukkan tempat tujuan: ')
+    while ((nodelist.getIdx(start) == -1) or (nodelist.getIdx(finish) == -1)):
+        start = input('Masukkan tempat awal: ')
+        finish = input('Masukkan tempat tujuan: ')
 
 if __name__ == '__main__':
     main()

@@ -68,8 +68,8 @@ def main():
     r = ReadFile()
     r.createListOfNode(nodelist)
 
-    # nodelist.getElmt(0).printInfo()
-    # nodelist.getElmt(1).printInfo()
+    nodelist.getElmt(0).printInfo()
+    nodelist.getElmt(1).printInfo()
     # nodelist.getElmt(2).printInfo()
     # nodelist.getElmt(3).printInfo()
     # nodelist.getElmt(4).printInfo()

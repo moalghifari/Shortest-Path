@@ -7,6 +7,7 @@ import math
 from copy import deepcopy
 
 class Node:
+	index = -1
 	def __init__(self,name,x,y):
 		self.name = name
 		self.x = x
@@ -30,7 +31,7 @@ class Node:
 		print ("x : ", self.x)
 		print ("y : ", self.y)
 	def visited(self):
-		self.visited = True
+		self.isVisited = True
 
 class Map:
 	def __init__(self,n):

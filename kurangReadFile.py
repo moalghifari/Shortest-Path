@@ -35,14 +35,14 @@ class Map:
     def __init__(self,n):
         self.n = n
         self.nodes = [None] * n
-        # self.matrix = [[-999,6,7,3,-999,-999],
-                    # [6,-999,-999,-999,-999,90],
-                    # [7,-999,-999,-999,10,-999],
-                    # [3,-999,-999,-999,-999, -999],
-                    # [-999,90,10,-999,-999,20],
-                    # [-999,-999,-999,-999,20,-999]
-                    # ]
-        self.matrix = [[None] * n] * n
+        self.matrix = [[-999,6,7,3,-999,-999],
+                    [6,-999,-999,-999,-999,90],
+                    [7,-999,-999,-999,10,-999],
+                    [3,-999,-999,-999,-999, -999],
+                    [-999,90,10,-999,-999,20],
+                    [-999,-999,-999,-999,20,-999]
+                    ]
+        # self.matrix = [[None] * n] * n
     def setNode(self,Node,idx):
         self.nodes[idx] = Node
     def setMatrix(self,row,col,bobot):
@@ -76,7 +76,7 @@ class State:
     def setCostf(self, costf):
         self.costf = costf
     def addPath(self, path):
-        self.path.extend(path)
+        self.path.append(path)
     def getIdx(self):
         return self.idx
     def getCosttotal(self):
@@ -87,23 +87,27 @@ class State:
         return self.path
     def isVisited(self, idx):
         return idx in self.path
-
+    def printPath(self, listOfNode):
+        print("The Path :")
+        for i in range(0, len(self.path)-1):
+            print(listOfNode[self.path[i]].getName(), ' -> ', end='')
+        print(listOfNode[self.path[len(self.path)-1]].getName())
 def main():
-    n = int(input('Masukkan n:'))
+    n = int(input('Masukkan n : '))
     M = Map(n)
     for i in range(n):
-        nodename = input('Masukkan node name:')
-        nodex = int(input('Masukkan node x:'))
-        nodey = int(input('Masukkan node y:'))
+        nodename = input('Masukkan node name : ')
+        nodex = int(input('Masukkan node x : '))
+        nodey = int(input('Masukkan node y : '))
         M.setNode(Node(nodename,nodex,nodey),i)
-    for i in range(n):
-        for j in range(n):
-            matrixelmt = int(input('Masukkan matrix ke' + str(i) + ' ' + str(j) + ':'))
-            M.setMatrix(i,j,matrixelmt)
-    goalname = input('Masukkan nama goalNode')
+    # for i in range(n):
+    #     for j in range(n):
+    #         matrixelmt = int(input('Masukkan matrix ke' + str(i) + ' ' + str(j) + ':'))
+    #         M.setMatrix(i,j,matrixelmt)
+    goalname = input('Masukkan nama goalNode : ')
     goalNode = M.getNodeIdx(goalname)
     # goalNode.print()
-    startname = input('Masukkan nama startNode')
+    startname = input('Masukkan nama startNode : ')
     startNode = M.getNodeIdx(startname)
     startState = State(startNode,M.getNode(startNode).getDistance(M.getNode(goalNode)),0)
     startState.addPath(startNode)
@@ -124,8 +128,11 @@ def main():
             costf = M.matrix[idx][i] + costfb
             costtotal = costf + M.getNode(i).getDistance(M.getNode(goalNode))
             nextState = State(i,costtotal,costf)
+            nextState.path = copy.deepcopy(currentState.path)
+            nextState.addPath(i)
             heapq.heappush(listOfState, nextState)
     print(currentState.getCostf())
+    currentState.printPath(M.nodes)
 
 if __name__ == '__main__':
     main()

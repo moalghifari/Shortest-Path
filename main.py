@@ -5,16 +5,10 @@ class Node:
         self.name = name
         self.x = x
         self.y = y
-        self.adjacency = []
-    def addAdjacency(self, tup):
-        self.adjacency.append(tup)
     def printInfo(self):
         print ("Name \t\t: ", self.name)
         print ("x \t\t: ", self.x)
         print ("y \t\t: ", self.y)
-        print ("Adjacency \t: ")
-        for adj in self.adjacency:
-            print ("-", adj[0].name , ", " , adj[1])
     def getName(self):
         return self.name
     def getDistance(self,Node):

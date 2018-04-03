@@ -26,7 +26,7 @@ while found:
     costf = listOfState[0][2]
     if (idx == 5):
         break
-    a = heapq.heappop(listOfState)
+    heapq.heappop(listOfState)
     for i in range (0,6):
         if (adjacencymatrix[idx][i]==-999):
             continue

@@ -1,0 +1,23 @@
+11
+GerDepITB -6.893218 107.610424
+Borromeus -6.893767 107.613037
+DaySumb -6.887398 107.613595
+GerSBM -6.887712 107.608879
+BNITamSar -6.893855 107.608442
+SimpCisitu -6.884905 107.611930
+SimpMCD -6.885262 107.613749
+UNPAD -6.892375 107.617824
+SimpTubis -6.883392 107.614562
+Ciumbuleuit -6.883374 107.604960
+BCADago -6.891428 107.613197
+None 1 None None 1 None None None None None None
+1 None None None None None None 1 None None 1
+None None None 1 None None 1 None None None 1
+None None 1 None 1 1 None None None None None
+1 None None 1 None None None None None None None
+None None None 1 None None 1 None None 1 None
+None None 1 None None 1 None 1 1 None None
+None 1 None None None None 1 None None None 1
+None None None None None None 1 None None None None
+None None None None None 1 None None None None None
+None 1 1 None None None None 1 None None None

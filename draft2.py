@@ -35,13 +35,6 @@ class Map:
     def __init__(self,n):
         self.n = n
         self.nodes = [None] * n
-        # self.matrix = [[-999,6,7,3,-999,-999],
-                    # [6,-999,-999,-999,-999,90],
-                    # [7,-999,-999,-999,10,-999],
-                    # [3,-999,-999,-999,-999, -999],
-                    # [-999,90,10,-999,-999,20],
-                    # [-999,-999,-999,-999,20,-999]
-                    # ]
         self.matrix = [[None] * n] * n
     def setNode(self,Node,idx):
         self.nodes[idx] = Node
@@ -76,7 +69,7 @@ class State:
     def setCostf(self, costf):
         self.costf = costf
     def addPath(self, path):
-        self.path.extend(path)
+        self.path.append(path)
     def getIdx(self):
         return self.idx
     def getCosttotal(self):
@@ -87,45 +80,69 @@ class State:
         return self.path
     def isVisited(self, idx):
         return idx in self.path
-
+    def printPath(self, listOfNode):
+        print('The Path :')
+        for i in range(0, len(self.path)-1):
+            print(listOfNode[self.path[i]].getName(), ' -> ', end='')
+        print(listOfNode[self.path[len(self.path)-1]].getName())
 def main():
-    n = int(input('Masukkan n:'))
+    file_name = input('Masukkan nama file: ')
+    file = open(file_name, 'r')
+    file_lines = file.read().split('\n')
+    n = int(file_lines[0])
+    print(n)
     M = Map(n)
-    for i in range(n):
-        nodename = input('Masukkan node name:')
-        nodex = int(input('Masukkan node x:'))
-        nodey = int(input('Masukkan node y:'))
-        M.setNode(Node(nodename,nodex,nodey),i)
-    for i in range(n):
-        for j in range(n):
-            matrixelmt = int(input('Masukkan matrix ke' + str(i) + ' ' + str(j) + ':'))
-            M.setMatrix(i,j,matrixelmt)
-    goalname = input('Masukkan nama goalNode')
+    i = 1
+    while (i <= n):
+        words = file_lines[i].split()
+        name = words[0]
+        M.setNode(Node(name,float(words[1]),float(words[2])),i-1)
+        i += 1
+
+    while (i <= 2*n):
+        words = file_lines[i].split()
+        j = i - n -1
+        for k in range(n):
+            if (words[k] != "None"):
+                print("1 ", j, " ", k)
+                M.setMatrix(j,k,float(words[k]) * M.nodes[j].getDistance(M.nodes[k]))
+            else:
+                print(j," ",k)
+                M.setMatrix(j,k,99999)
+        i += 1
+    goalname = input('Masukkan nama goalNode : ')
     goalNode = M.getNodeIdx(goalname)
-    # goalNode.print()
-    startname = input('Masukkan nama startNode')
+    print(goalNode)
+    startname = input('Masukkan nama startNode : ')
     startNode = M.getNodeIdx(startname)
     startState = State(startNode,M.getNode(startNode).getDistance(M.getNode(goalNode)),0)
     startState.addPath(startNode)
     listOfState = []
     #(costtotal, id, costf)
     heapq.heappush(listOfState, startState)
-    heapq.heappush(listOfState, startState)
+    print("INI LOH ", len(listOfState))
+    print(M.getNode(startState.getIdx()).getName())
     while True:
         currentState = copy.deepcopy(listOfState[0])
         idx = currentState.getIdx()
         costfb = currentState.getCostf()
+        print(idx, " ", goalNode)
         if (idx == goalNode):
+            print('XXXXXXXX')
             break
         heapq.heappop(listOfState)
         for i in range (0,M.n):
-            if (M.matrix[idx][i]==-999 or currentState.isVisited(i)):
-                continue
-            costf = M.matrix[idx][i] + costfb
-            costtotal = costf + M.getNode(i).getDistance(M.getNode(goalNode))
-            nextState = State(i,costtotal,costf)
-            heapq.heappush(listOfState, nextState)
+            # if (not(M.matrix[idx][i]==99999 or currentState.isVisited(i))):
+            if (not(currentState.isVisited(i))):
+            
+                costf = M.matrix[idx][i] + costfb
+                costtotal = costf + M.getNode(i).getDistance(M.getNode(goalNode))
+                nextState = State(i,costtotal,costf)
+                nextState.path = copy.deepcopy(currentState.path)
+                nextState.addPath(i)
+                heapq.heappush(listOfState, nextState)
     print(currentState.getCostf())
+    currentState.printPath(M.nodes)
 
 if __name__ == '__main__':
     main()

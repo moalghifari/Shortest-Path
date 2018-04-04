@@ -110,11 +110,11 @@ def main():
                 print(j," ",k)
                 M.setMatrix(j,k,99999)
         i += 1
+    startname = input('Masukkan nama startNode : ')
+    startNode = M.getNodeIdx(startname)
     goalname = input('Masukkan nama goalNode : ')
     goalNode = M.getNodeIdx(goalname)
     print(goalNode)
-    startname = input('Masukkan nama startNode : ')
-    startNode = M.getNodeIdx(startname)
     startState = State(startNode,M.getNode(startNode).getDistance(M.getNode(goalNode)),0)
     startState.addPath(startNode)
     listOfState = []

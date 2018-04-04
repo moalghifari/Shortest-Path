@@ -6,8 +6,6 @@ import math
 import copy
 from copy import deepcopy
 
-
-
 class Node:
     def __init__(self,name,x,y):
         self.name = name
@@ -87,64 +85,33 @@ class State:
     def isVisited(self, idx):
         return idx in self.path
     def printPath(self, listOfNode):
-        print("The Path :")
+        print("Rute Yang Dilaui \t: ", end='')
         for i in range(0, len(self.path)-1):
             print(listOfNode[self.path[i]].getName(), ' -> ', end=''),
         print(listOfNode[self.path[len(self.path)-1]].getName())
 
 def main():
-    file_name = input('Masukkan nama file: ')
+    file_name = input('Masukkan nama file \t\t\t: ')
     files = open(file_name, 'r')
 
     file_line_list = files.readlines()
     n = int(file_line_list[0])
-    print('BERAPAKAH NILAI N?!?!?!? ',n)
     M = Map(n)
     for i in range(n):
         idx = i+1
         line_list = file_line_list[idx].split()
-        print(i, ' ', line_list)
         M.nodes.append(Node(line_list[0], float(line_list[1]), float(line_list[2])))
-    print(M.nodes[0].name)
-    print(M.nodes[n-1].name)
     for i in range(0,n):
         idx = i+n+1
         line_list = file_line_list[idx].split()
-        print(i, ' ', line_list)
         listtemp = []
         for j in range(n):
             listtemp.append(float(line_list[j]))
         M.matrix.append(listtemp)
-    M.printMatrix()    
-        
-    #     while (file_line_list[i] != '*\n'):
-    #         line_list = file_line_list[i].split()
-    #         listOfNode.append(Node(line_list[0], int(line_list[1]), int(line_list[2])))
-    #         i = i + 1
-    #     for j in range(0, i):
-    #         line_list = file_line_list[i+j+1].split()
-    #         k = 1
-    #         while (k < len(line_list)):
-    #             # cari indeks si string
-    #             temp = (listOfNode.getElmt(listOfNode.getIdx(line_list[k])), int(line_list[k+1]))
-    #             listOfNode.getElmt(j).addAdjacency(temp)
-    #             k = k + 2
-    # n = int(input('Masukkan n : '))
-    # M = Map(n)
-    # for i in range(n):
-    #     nodename = input('Masukkan node name : ')
-    #     nodex = int(input('Masukkan node x : '))
-    #     nodey = int(input('Masukkan node y : '))
-    #     M.setNode(Node(nodename,nodex,nodey),i)
-    # for i in range(n):
-    #     for j in range(n):
-    #         matrixelmt = int(input('Masukkan matrix ke' + str(i) + ' ' + str(j) + ':'))
-    #         M.setMatrix(i,j,matrixelmt)
-    goalname = input('Masukkan nama goalNode : ')
-    goalNode = M.getNodeIdx(goalname)
-    # goalNode.print()
-    startname = input('Masukkan nama startNode : ')
+    startname = input('Masukkan nama tempat awal \t\t: ')
     startNode = M.getNodeIdx(startname)
+    goalname = input('Masukkan nama tempat tujuan akhir \t: ')
+    goalNode = M.getNodeIdx(goalname)
     startState = State(M.getNode(startNode).getDistance(M.getNode(goalNode)),startNode,0)
     startState.addPath(startNode)
     listOfState = []
@@ -152,32 +119,21 @@ def main():
     heapq.heappush(listOfState, startState)
     iterates = True
     while iterates:
-        # currentState = copy.deepcopy(listOfState[0])
         currentState = heapq.heappop(listOfState)
         idx = currentState.getIdx()
         costfb = currentState.getCostf()
-        print('CURRENT INDEX ', idx)
         if (idx == goalNode):
-            print('DONE')
             iterates = False
         else:
-            # heapq.heappop(listOfState)
             for i in range (0,M.n):
-                # if (M.matrix[idx][i]==-999 or currentState.isVisited(i)):
-                
-                if (not currentState.isVisited(i)):
-                #     continue
+                if not (M.matrix[idx][i]==-1 or currentState.isVisited(i)):
                     costf = M.getMatrix(int(idx),i) + costfb
                     costtotal = costf + M.getNode(i).getDistance(M.getNode(goalNode))
-                    print('idx,i = ', idx, ' ', i)
-                    print('costfb = ', costfb)
-                    print('costf = ', costf)
-                    print('costtotal = ', costtotal)
                     nextState = State(costtotal,i,costf)
                     nextState.path = copy.deepcopy(currentState.path)
                     nextState.addPath(i)
                     heapq.heappush(listOfState, nextState)
-    print(currentState.getCostf())
+    print("Jarak Total \t\t:",currentState.getCostf())
     currentState.printPath(M.nodes)
 
     # Plot Jawaban
@@ -198,19 +154,19 @@ def main():
         Sequence.append((M.nodes[currentState.path[i]].x,M.nodes[currentState.path[i]].y))
     for i in range (n):
         for j in range (n):
-            if (M.matrix[i][j]!=99999):
+            if (M.matrix[i][j]!=-1):
                 All.append((M.nodes[i].x,M.nodes[i].y))
                 All.append((M.nodes[j].x,M.nodes[j].y))
-    print(All)
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    scatter(xPoints,yPoints, s=100 ,marker='o', c='grey')
+    for i in range (len(M.nodes)):    
+        scatter(xPoints[i],yPoints[i], s=100 ,marker='o', c='grey')
+        ax.text(xPoints[i]-100,yPoints[i], M.nodes[i].getName())
     scatter(xSequence,ySequence, s=100 ,marker='o', color="red")
     left,right = ax.get_xlim()
     low,high = ax.get_ylim()
     arrow( left, 0, right -left, 0, length_includes_head = True, head_width = 0.15 )
     arrow( 0, low, 0, high-low, length_includes_head = True, head_width = 0.15 )
-    print(Sequence)
     for i in range (0, len(All)-1, 2):
         xA[0]=All[i][0]
         xA[1]=All[i+1][0]

@@ -1,10 +1,11 @@
+from pylab import *
+import matplotlib.pyplot as plt
+import matplotlib.lines as lines
 import heapq
 import math
 import copy
 from copy import deepcopy
-# from pylab import *
-# import matplotlib.pyplot as plt
-# import matplotlib.lines as lines
+
 
 
 class Node:
@@ -180,38 +181,50 @@ def main():
     currentState.printPath(M.nodes)
 
     # Plot Jawaban
-    # Sequence = []
-    # xPoints = []
-    # yPoints = []
-    # xSequence = []
-    # ySequence = []
-    # xA = [0,0]
-    # yA = [0,0]
-    # for i in range (len(M.nodes)):
-    #     xPoints.append(M.nodes[i].x)
-    #     yPoints.append(M.nodes[i].y)
-    # for i in range (len(currentState.path)):
-    #     xSequence.append(M.nodes[i].x)
-    #     ySequence.append(M.nodes[i].y)
-    # Sequence = currentState.path
-    # color=['m','g','y']
-    # fig = plt.figure()
-    # ax = fig.add_subplot(111)
-    # scatter(xPoints,yPoints, s=100 ,marker='o', c=color)
-    # scatter(xSequence,ySequence, s=100 ,marker='o', color="red")
-    # left,right = ax.get_xlim()
-    # low,high = ax.get_ylim()
-    # arrow( left, 0, right -left, 0, length_includes_head = True, head_width = 0.15 )
-    # arrow( 0, low, 0, high-low, length_includes_head = True, head_width = 0.15 ) 
-    # for i in range (0, len(Sequence), 2):
-    #     xA[0]=Sequence[i][0]
-    #     xA[1]=Sequence[i+1][0]
-    #     yA[0]=Sequence[i][1]
-    #     yA[1]=Sequence[i+1][1]
-    #     ax.add_line(Line2D(xA, yA, linewidth=2, color='blue'))
-
-    # grid()
-    # show()
+    All = []
+    Sequence = []
+    xPoints = []
+    yPoints = []
+    xSequence = []
+    ySequence = []
+    xA = [0.1,0.1]
+    yA = [0.1,0.1]
+    for i in range (len(M.nodes)):
+        xPoints.append(M.nodes[i].x)
+        yPoints.append(M.nodes[i].y)
+    for i in range (len(currentState.path)):
+        xSequence.append(M.nodes[currentState.path[i]].x)
+        ySequence.append(M.nodes[currentState.path[i]].y)
+        Sequence.append((M.nodes[currentState.path[i]].x,M.nodes[currentState.path[i]].y))
+    for i in range (n):
+        for j in range (n):
+            if (M.matrix[i][j]!=99999):
+                All.append((M.nodes[i].x,M.nodes[i].y))
+                All.append((M.nodes[j].x,M.nodes[j].y))
+    print(All)
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    scatter(xPoints,yPoints, s=100 ,marker='o', c='grey')
+    scatter(xSequence,ySequence, s=100 ,marker='o', color="red")
+    left,right = ax.get_xlim()
+    low,high = ax.get_ylim()
+    arrow( left, 0, right -left, 0, length_includes_head = True, head_width = 0.15 )
+    arrow( 0, low, 0, high-low, length_includes_head = True, head_width = 0.15 )
+    print(Sequence)
+    for i in range (0, len(All)-1, 2):
+        xA[0]=All[i][0]
+        xA[1]=All[i+1][0]
+        yA[0]=All[i][1]
+        yA[1]=All[i+1][1]
+        ax.add_line(Line2D(xA, yA, linewidth=1, color='blue'))
+    for i in range (0, len(Sequence)-1):
+        xA[0]=Sequence[i][0]
+        xA[1]=Sequence[i+1][0]
+        yA[0]=Sequence[i][1]
+        yA[1]=Sequence[i+1][1]
+        ax.add_line(Line2D(xA, yA, linewidth=2, color='green'))
+    grid()
+    show()
 
 if __name__ == '__main__':
     main()

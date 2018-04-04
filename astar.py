@@ -152,11 +152,6 @@ def main():
         xSequence.append(M.nodes[currentState.path[i]].x)
         ySequence.append(M.nodes[currentState.path[i]].y)
         Sequence.append((M.nodes[currentState.path[i]].x,M.nodes[currentState.path[i]].y))
-    for i in range (n):
-        for j in range (n):
-            if (M.matrix[i][j]!=-1):
-                All.append((M.nodes[i].x,M.nodes[i].y))
-                All.append((M.nodes[j].x,M.nodes[j].y))
     fig = plt.figure()
     ax = fig.add_subplot(111)
     for i in range (len(M.nodes)):    
@@ -167,12 +162,26 @@ def main():
     low,high = ax.get_ylim()
     arrow( left, 0, right -left, 0, length_includes_head = True, head_width = 0.15 )
     arrow( 0, low, 0, high-low, length_includes_head = True, head_width = 0.15 )
-    for i in range (0, len(All)-1, 2):
-        xA[0]=All[i][0]
-        xA[1]=All[i+1][0]
-        yA[0]=All[i][1]
-        yA[1]=All[i+1][1]
-        ax.add_line(Line2D(xA, yA, linewidth=1, color='blue'))
+    for i in range (n):
+        for j in range (n):
+            if (M.matrix[i][j]!=-1):
+                xA[0]=M.nodes[i].x
+                xA[1]=M.nodes[j].x
+                yA[0]=M.nodes[i].y
+                yA[1]=M.nodes[j].y
+                ax.add_line(Line2D(xA, yA, linewidth=1, color='blue'))
+                middleX = (xA[0]+xA[1])/2
+                middleY = (yA[0]+yA[1])/2
+                ax.text(middleX,middleY, M.matrix[i][j])
+    # for i in range (0, len(All)-1, 2):
+    #     xA[0]=All[i][0]
+    #     xA[1]=All[i+1][0]
+    #     yA[0]=All[i][1]
+    #     yA[1]=All[i+1][1]
+    #     ax.add_line(Line2D(xA, yA, linewidth=1, color='blue'))
+    #     middleX = (xA[0]+xA[1])/2
+    #     middleY = (yA[0]+yA[1])/2
+    #     ax.text(middleX,middleY, M.matrix[i%M.n][i//M.n])
     for i in range (0, len(Sequence)-1):
         xA[0]=Sequence[i][0]
         xA[1]=Sequence[i+1][0]

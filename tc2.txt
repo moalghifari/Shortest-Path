@@ -1,14 +1,14 @@
 10
-TuguAsiaAfrika 768 128
-MenaraMasjidRayaBandung 648 105
-SimpangRayaBandung 760 254
-PlazaParahyangan 636 241
-Cibadak 403 206
-Sudirman 411 83
-StarbucksBraga 999 151
-MilleniumClub 983 287
-ApotekCikapundung 819 26
-Banceuy 660 0
+TuguAsiaAfrika 768 872
+MenaraMasjidRayaBandung 648 895
+SimpangRayaBandung 760 746
+PlazaParahyangan 636 759
+Cibadak 403 794
+Sudirman 411 917
+StarbucksBraga 999 849
+MilleniumClub 983 713
+ApotekCikapundung 819 974
+Banceuy 660 999
 -1 140 150 -1 -1 -1 300 -1 190 -1
 140 -1 -1 -1 -1 260 -1 -1 -1 120
 150 -1 -1 140 -1 -1 -1 250 -1 -1

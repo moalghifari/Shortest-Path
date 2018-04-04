@@ -85,7 +85,7 @@ class State:
     def isVisited(self, idx):
         return idx in self.path
     def printPath(self, listOfNode):
-        print("Rute Yang Dilaui \t: ", end='')
+        print("Rute Yang Dilalui \t: ", end='')
         for i in range(0, len(self.path)-1):
             print(listOfNode[self.path[i]].getName(), ' -> ', end=''),
         print(listOfNode[self.path[len(self.path)-1]].getName())
